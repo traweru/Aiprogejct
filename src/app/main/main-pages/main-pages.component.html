@@ -1,0 +1,36 @@
+<!-- main.component.html -->
+<div class="center-wrapper">
+  <div class="chat-window">
+    <!-- Шапка с кнопкой входа -->
+    <div class="header">
+      <a routerLink="/login" class="login-button">Войти</a>
+    </div>
+
+    <!-- Основная зона чата -->
+    <div class="content">
+      <div class="chat-container">
+        <div *ngFor="let msg of messages" [ngClass]="msg.role">
+          <strong>{{ msg.role | uppercase }}:</strong> {{ msg.content }}
+          <!-- Если сообщение содержит изображение -->
+          <div *ngIf="msg.image">
+            <img [src]="msg.image" alt="Загруженное изображение" class="uploaded-image" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Область ввода -->
+    <div class="input-area">
+      <div class="message-input">
+        <input type="file" (change)="uploadFile($event)" accept="image/*" class="file-input" />
+        <input [(ngModel)]="userInput" placeholder="Введите ваше сообщение..." />
+        <button (click)="sendMessage()">Отправить</button>
+      </div>
+    </div>
+
+    <!-- Футер с кнопкой -->
+    <div class="footer">
+      <a routerLink="/history" class="history-button">Перейти к истории</a>
+    </div>
+  </div>
+</div>
